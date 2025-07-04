@@ -60,7 +60,8 @@ class hardtWondra
 private:
 
     scalar cutoff_;
-    scalar spread_;
+    // scalar spread_;
+	  scalar diff_;
 
     // Private Member Functions
 

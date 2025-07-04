@@ -61,10 +61,8 @@ Foam::hardtWondraGasPhase::hardtWondraGasPhase
         dict
     ),
     cutoff_(modelDict().lookupOrDefault<scalar>("cutoff",1e-3)),
-    spread_(modelDict().lookupOrDefault<scalar>("spread",3))
-
-
-
+    // spread_(modelDict().lookupOrDefault<scalar>("spread",3))
+		diff_(modelDict().lookupOrDefault<scalar>("diff",1e-10))
 
 {
 
@@ -82,8 +80,9 @@ Foam::hardtWondraGasPhase::massSource( volScalarField& rhoSource)
     (
         "DPsi",
         dimensionSet(0,2,0,0,0,0,0),
-        spread_/sqr(gAverage(mesh.nonOrthDeltaCoeffs())
-    ));
+        // spread_/sqr(gAverage(mesh.nonOrthDeltaCoeffs()))
+				diff_
+		 );
 
     dimensionedScalar intPsi0 = fvc::domainIntegrate(rhoSource);
 
