@@ -136,9 +136,19 @@ void Foam::gradAlpha::correct()
 
     // Cell gradient of alpha
     const volVectorField gradAlpha(fvc::grad(alpha1_, "nHat"));
+		volVectorField gradAlphas = gradAlpha;
 
-    // Interpolated face-gradient of alpha
-    surfaceVectorField gradAlphaf(fvc::interpolate(gradAlpha));
+		Info << "Smoothing alpha gradient" << nl;
+		// Smooth interface curvature to reduce spurious currents
+		for (int  corra = 0; corra < 8; corra ++)
+			{
+				gradAlphas = fvc::average( fvc::interpolate(gradAlphas) );
+			}
+		// Interpolated face-gradient of alpha
+		surfaceVectorField gradAlphaf(fvc::interpolate(gradAlphas));
+
+		// // Interpolated face-gradient of alpha
+    // surfaceVectorField gradAlphaf(fvc::interpolate(gradAlpha));
 
     // Face unit interface normal
     surfaceVectorField nHatfv(gradAlphaf/(mag(gradAlphaf) + deltaN_));
