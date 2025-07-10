@@ -1,3 +1,7 @@
+# README
+
+This fork of TwoPhaseFlow incorporates some improvements over the original formulation for OpenFOAM v2206. The original README is shown below:
+
 # twophaseflow
 
 the TwoPhaseFlow Library adds new surface tension and phase change models to OpenFOAM and provides benchmark cases for verification
